@@ -18,9 +18,15 @@ public class CrossHair : MonoBehaviour
 
     public void WalkingAnimation(bool _flag)
     {
+        WeaponManager.currentWeaponAnim.SetBool("Walk", _flag);
         anim.SetBool("Walking", _flag);
     }
     public void RunningAnimation(bool _flag)
+    {
+        WeaponManager.currentWeaponAnim.SetBool("Run", _flag);
+        anim.SetBool("Running", _flag);
+    }
+    public void JumppingAnimation(bool _flag)
     {
         anim.SetBool("Running", _flag);
     }
