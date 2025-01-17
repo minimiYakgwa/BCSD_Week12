@@ -215,15 +215,15 @@ public class PlayerController : MonoBehaviour
 
     private void CharacterRotation()
     {
-        float yRotation = Input.GetAxisRaw("Mouse X");
-        Vector3 characterRotation = new Vector3(0f, yRotation, 0f) * lookSensibility;
-        myRigid.MoveRotation(myRigid.rotation * Quaternion.Euler(characterRotation));
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
+        if (Mathf.Abs(Input.GetAxisRaw("Mouse X")) >= 0.1f)
+        {
+            float yRotation = Input.GetAxisRaw("Mouse X");
+            Vector3 characterRotation = new Vector3(0f, yRotation, 0f) * lookSensibility;
+            myRigid.MoveRotation(myRigid.rotation * Quaternion.Euler(characterRotation));
+        }
         
     }
+
 
 
 
