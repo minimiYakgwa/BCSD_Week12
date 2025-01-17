@@ -40,7 +40,7 @@ public class Rock : MonoBehaviour
     
     private void Destruction()
     {
-        SoundManager.instance.StopSE(destroy_Sound);
+        SoundManager.instance.PlaySE(destroy_Sound);
 
         col.enabled = false;
         Destroy(go_rock);

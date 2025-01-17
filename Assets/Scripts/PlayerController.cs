@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     private GunController theGunController;
     private CapsuleCollider capsuleCollider;
     private CrossHair theCrossHair;
+    private StatusController theStatusController;
 
     private Vector3 lastPos;
     private void Start()
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour
         myRigid = GetComponent<Rigidbody>();
         theGunController = FindObjectOfType<GunController>();
         capsuleCollider = GetComponent<CapsuleCollider>();
+        theStatusController = FindObjectOfType<StatusController>();
     }
     private void Update()
     {
@@ -120,7 +122,7 @@ public class PlayerController : MonoBehaviour
 
     private void TryJump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGround)
+        if (Input.GetKeyDown(KeyCode.Space) && isGround && theStatusController.GetCurrentSP() > 0)
         {
             Jump();
         }
@@ -132,7 +134,7 @@ public class PlayerController : MonoBehaviour
         {
             Crouch();
         }
-        Debug.Log("มกวม!!");
+        theStatusController.DecreaseStamina(100);
         myRigid.velocity = transform.up * jumpForce;
     }
 
@@ -173,11 +175,11 @@ public class PlayerController : MonoBehaviour
     }
     private void TryRun()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && theStatusController.GetCurrentSP() > 0)
         {
             Running();
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
+        if (Input.GetKeyUp(KeyCode.LeftShift) || theStatusController.GetCurrentSP() <= 0)
         {
             RunningCancle();
         }
@@ -187,7 +189,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isCrouch)
           Crouch();
-
+        theStatusController.DecreaseStamina(10);
         theGunController.CancleFineSight();
         theCrossHair.RunningAnimation(isRun);
         isRun = true;

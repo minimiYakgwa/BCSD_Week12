@@ -58,11 +58,14 @@ public class SoundManager : MonoBehaviour
                         return;
                     }
                 }
+                Debug.Log("모든 가용 AudioSource가 사용중입니다.");
+                return;
             }
-            Debug.Log("모든 가용 AudioSource가 사용중입니다.");
-            return;
+            
+
         }
         Debug.Log(_name + "사운드가 SoundManager에 등록되지 않았습니다.");
+
     }
 
     public void StopAllSE()
