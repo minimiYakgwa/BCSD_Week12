@@ -185,7 +185,26 @@ public class StatusController : MonoBehaviour
 
         if (currentDp < 0)
         {
-            Debug.Log("체력이 0이 되었습니다.");
+            Debug.Log("방어력이 0이 되었습니다.");
+        }
+    }
+
+    public void IncreaseSP(int _count)
+    {
+        Debug.Log("SP회복");
+        if (currentSp + _count < sp)
+            currentSp += _count;
+        else
+            currentSp = sp;
+    }
+
+    public void DecreaseSp(int _count)
+    {
+        currentSp -= _count;
+
+        if (currentSp < 0)
+        {
+            Debug.Log("마나가 0이 되었습니다.");
         }
     }
 
@@ -220,6 +239,4 @@ public class StatusController : MonoBehaviour
         else
             currentThirsty -= _count;
     }
-
-
 }

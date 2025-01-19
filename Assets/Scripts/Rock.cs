@@ -6,6 +6,8 @@ public class Rock : MonoBehaviour
 {
     [SerializeField]
     private int hp;
+    [SerializeField]
+    private int count;
 
     [SerializeField]
     private float destroyTime;
@@ -19,11 +21,15 @@ public class Rock : MonoBehaviour
     private GameObject go_debris;
     [SerializeField]
     private GameObject go_effect_prefabs;
+    [SerializeField]
+    private GameObject go_rock_item_prefabs;
 
     [SerializeField]
     private string strike_Sound;
     [SerializeField]
     private string destroy_Sound;
+
+    
 
     public void Mining()
     {
@@ -45,7 +51,8 @@ public class Rock : MonoBehaviour
         col.enabled = false;
         Destroy(go_rock);
 
-
+        for (int i = 0; i < count; i++)
+            Instantiate(go_rock_item_prefabs, go_rock.transform.position, Quaternion.identity);
 
         go_debris.SetActive(true);
         Destroy(go_debris, destroyTime);

@@ -57,15 +57,19 @@ public class PlayerController : MonoBehaviour
         theStatusController = FindObjectOfType<StatusController>();
     }
     private void Update()
-    {
-        IsGround();
-        TryJump();
-        TryRun();
-        TryCrouch();
-        MoveCheck();
-        Move();
-        CameraRotation();
-        CharacterRotation();
+    { 
+        if (!Inventory.inventoryActivated)
+        {
+            IsGround();
+            TryRun();
+            MoveCheck();
+            TryCrouch();
+            TryJump();
+            Move();
+            CameraRotation();
+            CharacterRotation();
+        }
+        
         
     }
 
