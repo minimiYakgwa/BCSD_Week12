@@ -4,15 +4,15 @@ using UnityEngine;
 
 public abstract class CloseWeaponController : MonoBehaviour
 {
-    
-
-
     [SerializeField]
     protected CloseWeapon currentCloseWeapon;
 
     protected bool isAttack = false;
     protected bool isSwing = false;
+
     protected RaycastHit hitinfo;
+    [SerializeField]
+    protected LayerMask layerMask;
 
     
 
@@ -52,7 +52,7 @@ public abstract class CloseWeaponController : MonoBehaviour
 
     protected bool CheckObject()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out hitinfo, currentCloseWeapon.range))
+        if (Physics.Raycast(transform.position, transform.forward, out hitinfo, currentCloseWeapon.range, layerMask))
             return true;
         else return false;
     }
